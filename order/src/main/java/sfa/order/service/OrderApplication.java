@@ -1,4 +1,4 @@
-package sfa.order_service;
+package sfa.order.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

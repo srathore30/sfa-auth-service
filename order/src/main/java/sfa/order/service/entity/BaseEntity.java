@@ -1,4 +1,4 @@
-package entity;
+package sfa.order.service.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

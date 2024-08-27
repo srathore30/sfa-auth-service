@@ -1,4 +1,4 @@
-package sfa.order_service;
+package sfa.order.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

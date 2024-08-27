@@ -1,4 +1,4 @@
-package entity;
+package sfa.order.service.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
