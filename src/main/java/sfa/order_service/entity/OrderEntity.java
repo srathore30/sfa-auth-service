@@ -16,4 +16,5 @@ public class OrderEntity extends BaseEntity{
     private int price;
     private SalesLevelConstant salesLevel;
     private OrderStatus status;
+    private Long productId;
 }
