@@ -1,22 +1,26 @@
 package sfa.auth_service.controller;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sfa.auth_service.AuthUtils.JwtUtil;
 import sfa.auth_service.dto.response.AuthenticationResponse;
 import sfa.auth_service.entity.User;
 import sfa.auth_service.service.UserService;
 
 @RestController
+@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtUtil helper;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> addUser(@NonNull @RequestBody User user) {
@@ -40,5 +44,18 @@ public class UserController {
     @GetMapping("/user")
     public String userEndpoint() {
         return "This is the user endpoint. Users with ADMIN or MEMBER roles can access this.";
+    }
+
+    @GetMapping("/validateToken")
+    public ResponseEntity<String> validateTok(@RequestParam String token) {
+        try {
+            if (helper.validateOnlyToken(token)) {
+                return new ResponseEntity<>("valid token", HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Not valid token", HttpStatus.UNAUTHORIZED);
+            }
+        } catch (ExpiredJwtException e) {
+            return new ResponseEntity<>("Expired token", HttpStatus.UNAUTHORIZED);
+        }
     }
 }
