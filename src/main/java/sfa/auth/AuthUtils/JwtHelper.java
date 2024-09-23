@@ -23,8 +23,8 @@ public class JwtHelper {
     @Autowired
     private UserRepository userRepo;
 
-    @Value("${jwt.tokenValidityInSeconds}")
-    public long JWT_TOKEN_VALIDITY ;
+
+    public long JWT_TOKEN_VALIDITY = 720000 ;
 
     private final String secret = "ABCDEFGHIJfVIVEKghklKLMNNDHDNDO01234persisjpandeydcjsdcknsjdt5PQRSUVWXYZabcdemnouvwxyz664565665178-_"; // secret code
     byte[] secretKeyBytes = secret.getBytes();
